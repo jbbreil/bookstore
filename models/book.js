@@ -4,41 +4,25 @@ const mongoose = require("mongoose");
    from this schema object (courseSchema) by default it will use a existing collection with name courses */
 
 var booksSchema = new mongoose.Schema({  
-    bookISBN: { 
+    title: { 
         type:String, 
-        required: 'This field is required!'
     },
-    bookTitle: {
+    isbn: {
         type:String,
-        required: 'This field is required!'
     },
-    bookGenre: {
+    author: {
         type: String, 
-        default: 'Webbutveckling'
     },
-    bookGenre: { 
+    description: { 
         type:String,
-        required: 'This field is required!'
     },
-    bookDescription: { 
+    published_year: { 
         type:String,
-        default: '',
-		trim: true
     },
-    bookAuthor: { 
-        type:String,
-        required: 'This field is required!'
-    },
-    bookImageURL: { 
+    publisher: { 
         type:String
     },
-    bookBuyURL: { 
-        type:String
-    },
-    bookRelease: {
-        type: Date,
-        default: () => Date.now() + 7*24*60*60*1000
-    }
+    updated_date: { type: Date, default: Date.now },
 });
 
 // The first parameter is the name of the schema and second the schema-objects (collection)
