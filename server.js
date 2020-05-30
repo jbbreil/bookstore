@@ -38,8 +38,8 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
-// Set up Server on Horukos 
-app.listen(process.env.PORT || 5000); // process.env.PORT || 3000 means: whatever is in the environment variable PORT, or 3000 if there's nothing there.
+// Set up Server on Heroku
+app.listen(process.env.PORT || 5000); // process.env.PORT || 5000 means: whatever is in the environment variable PORT, or 3000 if there's nothing there.
 console.log('Running on port 5000...');
 
 /* !IMPORTAT Hooking up the routes before any parsing middleware above in order to get the objects */

@@ -12,17 +12,25 @@ var booksSchema = new mongoose.Schema({
     },
     author: {
         type: String, 
+        default: 'Okänd'
     },
     description: { 
         type:String,
+        default: 'Ingen beskrivning'
     },
     published_year: { 
         type:String,
+        default: 'Okänd'
     },
     publisher: { 
-        type:String
+        type:String,
+        default: 'Okänd'
     },
-    updated_date: { type: Date, default: Date.now },
+    updated_date: {
+        type:String, 
+        created_at: Date,
+        updated_at: {default: Date.now }
+    }
 });
 
 // The first parameter is the name of the schema and second the schema-objects (collection)

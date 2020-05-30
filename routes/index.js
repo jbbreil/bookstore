@@ -6,7 +6,6 @@ var Books = require('../models/book.js');
 
 /***** SET UP THE ROUTER/CONTROLLERS *****/
 
-// Here we retain a value for the property/variable viewTitle inside the addOredit.hbs
 router.get('/', (req, res) => {
     res.send('Vänligen använd: http://localhost:5000/book')
     });
