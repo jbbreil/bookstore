@@ -6,11 +6,11 @@ var Books = require('../models/book.js');
 
 /***** SET UP THE ROUTER/CONTROLLERS *****/
 
-router.get('/', (req, res) => {
+/*router.get('/', (req, res) => {
     res.send('Vänligen använd: http://localhost:5000/book')
-    });
+    });*/
 
-router.get('/book', (req, res) => {
+router.get('/', (req, res) => {
     // Retrive records from MongoDB collection
     Books.find(function(err, books) {// Second parameter returns the collection records from MongoDB and put them inside the list property which contain the table-layout
         if (err) {
@@ -20,7 +20,7 @@ router.get('/book', (req, res) => {
     });
 });
 
-router.get('/book/:_id', (req, res) => {
+router.get('/:_id', (req, res) => {
     // Retrive a specific MongoDb collection by id 
     Books.findById(req.params._id, (err, book) => {
         if (err) {
@@ -30,7 +30,7 @@ router.get('/book/:_id', (req, res) => {
     });
 });
 
-router.delete('/book/:_id', (req, res) => {
+router.delete('/:_id', (req, res) => {
     Books.findByIdAndRemove(req.params._id, (err, book) => {
         if (err) {
             throw err;
@@ -41,7 +41,7 @@ router.delete('/book/:_id', (req, res) => {
 });
 
 // Parameters send via form submition and pass to the req object body attribute (req.body)
-router.post('/book/', (req, res) => {
+router.post('/', (req, res) => {
     var book = new Books();
     book.isbn = req.body.isbn;
     book.title = req.body.title;
@@ -57,7 +57,7 @@ router.post('/book/', (req, res) => {
     });
 });
 
-router.patch('/book/:_id', async (req, res) => {
+router.patch('/:_id', async (req, res) => {
 
     try {
         const book = await Books.updateOne({ _id: req.params._id }, 
