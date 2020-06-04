@@ -2,26 +2,24 @@
   <b-row>
     <b-col cols="12">
       <h2>
-        Edit Book
-        <b-link href="#/">(Book List)</b-link>
+        Redigera Bok
+        <b-link href="#/">(Bok Lista)</b-link>
       </h2>
       <b-jumbotron>
         <template slot="header">
           {{book.title}}
         </template>
         <template slot="lead">
-          ISBN: {{book.isbn}}<br>
-          Author: {{book.author}}<br>
-          Description: {{book.description}}<br>
-          Published Year: {{book.published_year}}<br>
-          Publisher: {{book.publisher}}<br>
+        <b>ISBN: </b>{{book.isbn}}<br>
+        <b>Författare: </b>{{book.author}}<br>
+        <b>Beskrivning: </b>{{book.description}}<br>
+        <b>Utgivare: </b>{{book.publisher}}<br>
+        <b>Boken källa: </b><b-link :href="book.url" target="_blank">Länk till källan</b-link><br> 
         </template>
-        <hr class="my-4">
-        <p>
-          Updated Date: {{book.updated_date}}
-        </p>
+
         <b-btn variant="success" @click.stop="editbook(book._id)">Redigera</b-btn>
         <b-btn variant="danger" @click.stop="deletebook(book._id)">Radera</b-btn>
+   
       </b-jumbotron>
     </b-col>
   </b-row>
@@ -35,7 +33,7 @@ export default {
   name: 'ShowBook',
   data () {
     return {
-      book: []
+      book: [],
     }
   },
   created () {
@@ -43,8 +41,8 @@ export default {
     .then(response => {
       this.book = response.data
     })
-    .catch(e => {
-      this.errors.push(e)
+    .catch(error => {
+        console.log(error)
     })
   },
   methods: {
@@ -61,9 +59,9 @@ export default {
           name: 'BookList'
         })
       })
-      .catch(e => {
-        this.errors.push(e)
-      })
+      .catch(error => {
+        console.log(error)
+    })
     }
   }
 }
@@ -72,5 +70,14 @@ export default {
 <style>
   .jumbotron {
     padding: 2rem;
+  }
+  .btn-danger {
+    margin-left: .5em;
+  }
+  .lead {
+    padding: 20px 0 20px 0;
+  }
+  .jumbotron h1 {
+      font-size: 3.5rem;
   }
 </style>

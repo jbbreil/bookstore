@@ -43,13 +43,12 @@ router.delete('/book/:_id', (req, res) => {
 // Parameters send via form submition and pass to the req object body attribute (req.body)
 router.post('/book/', (req, res) => {
     var book = new Books();
-    book.title = req.body.title;
     book.isbn = req.body.isbn;
+    book.title = req.body.title;
     book.author = req.body.author;
     book.description = req.body.description;
-    published_year = req.body.published_year;
     book.publisher = req.body.publisher;
-    book.updated_date = req.body.updated_date;
+    book.url = req.body.url;
     book.save((err, book) => {// In order to save these records we need to call save function to save values from this schema-object and a callback function that check for errors
         if (err) {
             throw err;
@@ -58,24 +57,23 @@ router.post('/book/', (req, res) => {
     });
 });
 
-router.put('/book/:_id', (req, res) => {
-    var id = req.body.id;
-    var update = {
-        title: req.body.title,
-        isbn: req.body.isbn,
-        author: req.body.author,
-        description: req.body.description,
-        published_year: req.body.published_year,
-        publisher: req.body.publisher,
-        updated_date: req.body.updated_date,
+router.patch('/book/:_id', async (req, res) => {
+
+    try {
+        const book = await Books.updateOne({ _id: req.params._id }, 
+            {$set: {
+                isbn: req.body.isbn, 
+                title: req.body.title, 
+                author: req.body.author, 
+                description: req.body.description, 
+                publisher: req.body.publisher, 
+                url: req.body.url}}
+            );
+            res.json(book);
+    } catch (error) {
+        res.json({message:err})
     }
-    Books.findOneAndUpdate(id, update, { new: true }, (err, book) => {
-    
-        if (err) {
-            throw err;
-        }
-        res.json(book);        
-    });
+  
 });
 
 // Export the router object from this route.

@@ -10,31 +10,31 @@
                   horizontal
                   :label-cols="4"
                   breakpoint="md"
-                  label="Enter ISBN">
+                  label="Ange ISBN">
           <b-form-input id="isbn" :state="state" v-model.trim="book.isbn"></b-form-input>
         </b-form-group>
         <b-form-group id="fieldsetHorizontal"
                   horizontal
                   :label-cols="4"
                   breakpoint="md"
-                  label="Enter Title">
+                  label="Ange Titel">
           <b-form-input id="title" :state="state" v-model.trim="book.title"></b-form-input>
         </b-form-group>
         <b-form-group id="fieldsetHorizontal"
                   horizontal
                   :label-cols="4"
                   breakpoint="md"
-                  label="Enter Author">
+                  label="Ange Författare">
           <b-form-input id="author" :state="state" v-model.trim="book.author"></b-form-input>
         </b-form-group>
         <b-form-group id="fieldsetHorizontal"
                   horizontal
                   :label-cols="4"
                   breakpoint="md"
-                  label="Enter Description">
+                  label="Ange Beskrivning">
             <b-form-textarea id="description"
                        v-model="book.description"
-                       placeholder="Enter something"
+                       placeholder="Skriv nånting"
                        :rows="2"
                        :max-rows="6">{{book.description}}</b-form-textarea>
         </b-form-group>
@@ -42,15 +42,15 @@
                   horizontal
                   :label-cols="4"
                   breakpoint="md"
-                  label="Enter Publisher Year">
-          <b-form-input id="published_year" :state="state" v-model.trim="book.published_year"></b-form-input>
+                  label="Ange Utgivare">
+          <b-form-input id="publisher" :state="state" v-model.trim="book.publisher"></b-form-input>
         </b-form-group>
-        <b-form-group id="fieldsetHorizontal"
+                <b-form-group id="fieldsetHorizontal"
                   horizontal
                   :label-cols="4"
                   breakpoint="md"
-                  label="Enter Publisher">
-          <b-form-input id="publisher" :state="state" v-model.trim="book.publisher"></b-form-input>
+                  label="Ange URL">
+          <b-form-input id="url" :state="state" v-model.trim="book.url"></b-form-input>
         </b-form-group>
         <b-button type="submit" variant="primary">Update</b-button>
       </b-form>
@@ -66,7 +66,7 @@ export default {
   name: 'EditBook',
   data () {
     return {
-      book: {}
+      book: {},
     }
   },
   created () {
@@ -74,22 +74,22 @@ export default {
     .then(response => {
       this.book = response.data
     })
-    .catch(e => {
-      this.errors.push(e)
+    .catch(error => {
+        console.log(error)
     })
   },
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      axios.put(`http://localhost:5000/book/` + this.$route.params.id, this.book)
+      axios.patch(`http://localhost:5000/book/` + this.$route.params.id, this.book)
       .then(response => {
         this.$router.push({
-          name: 'ShowBook',
+          name: 'BookList',
           params: { id: this.$route.params.id }
         })
       })
-      .catch(e => {
-        this.errors.push(e)
+      .catch(error => {
+        console.log(error)
       })
     }
   }
