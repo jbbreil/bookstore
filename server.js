@@ -43,4 +43,4 @@ app.listen(process.env.PORT || 5000); // process.env.PORT || 5000 means: whateve
 console.log('Running on port 5000...');
 
 /* !IMPORTAT Hooking up the routes before any parsing middleware above in order to get the objects */
-app.use('https://infinite-taiga-92618.herokuapp.com/book/', indexRouter); // Applications root and what router we want to handle in that route
+app.use('https://infinite-taiga-92618.herokuapp.com/', indexRouter); // Applications root and what router we want to handle in that route
